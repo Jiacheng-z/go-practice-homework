@@ -41,16 +41,9 @@ func encoder(body string) []byte {
 
 	binary.BigEndian.PutUint32(ret[:4], uint32(packetLen))
 	binary.BigEndian.PutUint16(ret[4:6], uint16(headerLen))
-
-	version := 5
-	binary.BigEndian.PutUint16(ret[6:8], uint16(version))
-	operation := 6
-	binary.BigEndian.PutUint32(ret[8:12], uint32(operation))
-	sequence := 7
-	binary.BigEndian.PutUint32(ret[12:16], uint32(sequence))
-
-	byteBody := []byte(body)
-	copy(ret[16:], byteBody)
-
+	binary.BigEndian.PutUint16(ret[6:8], uint16(1))
+	binary.BigEndian.PutUint32(ret[8:12], uint32(9))
+	binary.BigEndian.PutUint32(ret[12:16], uint32(1))
+	copy(ret[16:], body)
 	return ret
 }
